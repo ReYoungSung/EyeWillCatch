@@ -50,3 +50,26 @@ git clone --branch main https://github.com/ReYoungSung/EyeWillCatch.git
 1. 외부 시선 추적 프로그램에서 보정을 완료하고 마우스 커서가 시선을 따라 움직이는지 확인합니다.
 2. Unity에서 선택한 씬을 실행해 입력과 UI 반응을 확인합니다.
 3. 커서 위치가 어긋나면 카메라·얼굴 위치와 외부 프로그램의 보정 상태를 먼저 점검합니다.
+
+## 사용법
+
+### 준비와 씬 선택
+
+1. 웹캠과 시선→마우스 변환 프로그램을 실행하고 보정을 완료합니다.
+2. 시선을 옮겼을 때 운영체제의 마우스 커서가 움직이는지 먼저 확인합니다.
+3. Unity에서 체험할 게임 씬을 직접 열고 Play를 실행합니다. 기본 시작 씬이 등록되어 있지 않으므로 아래 게임을 개별적으로 확인합니다.
+4. 화면의 목표를 바라보며 캐릭터·조명·레이가 시선 위치를 따라가는지 확인합니다. 외부 추적 연결 전에는 마우스를 움직여 입력 반응을 점검할 수 있습니다.
+
+| 씬 | 조작과 진행 |
+| --- | --- |
+| `Game1Scene.unity` | 나타난 도둑 쪽으로 커서를 이동해 경찰 캐릭터를 움직입니다. 판정 영역에 접촉하면 점수가 증가합니다. 설정된 등장 횟수를 마치면 점수 화면이 열립니다. |
+| `Game2FollowScene.unity` | 커서가 가리키는 위치를 따라 조명의 방향이 회전합니다. 화면의 목표를 따라 시선을 움직입니다. |
+| `Game6Scene.unity` | 도둑을 커서로 가리켜 레이를 맞춥니다. 해당 판정은 클릭 없이 레이 적중으로 처리됩니다. |
+
+커서가 보이지 않아도 조명이 움직일 수 있습니다. Game2의 조명 스크립트는 실행 중 커서를 숨깁니다.
+
+### 종료와 전환
+
+Editor에서는 Play를 끄면 현재 체험을 종료할 수 있습니다. Game1 종료 코드는 `Game2Scene`으로 이동하도록 작성되어 있으나 현재 안내된 씬 파일 이름은 `Game2FollowScene`입니다. 연속 플레이를 구성하려면 씬 전환 이름과 Build Settings 등록을 맞춰야 합니다. 이 설정을 하기 전에는 씬별 실행을 사용합니다.
+
+동작 기준: [MouseCharacter.cs](KCGs/Assets/Scripts/Game1/MouseCharacter.cs) · [GameController.cs](KCGs/Assets/Scripts/Game1/GameController.cs) · [MoveLight.cs](KCGs/Assets/Scripts/Game2/MoveLight.cs) · [MouseRay.cs](KCGs/Assets/Scripts/Game6/MouseRay.cs)
